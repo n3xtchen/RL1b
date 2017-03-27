@@ -7,6 +7,7 @@ basicChart  <- function(data, name, color='pink', dateBreaks="1 day", yBreaks=10
   y = c(seq(min(data[,name], na.rm=T)-2*yBreaks, max(data[,name], na.rm=T)+2*yBreaks, yBreaks))
 
   p <- ggplot(data, aes_string(x='date', y=paste0("`", name, "`"))) + geom_line(colour=color) +
+    coord_cartesian(ylim = c(min(y), max(y))) +
     geom_text(aes_string(label = paste0("`", name, "`"), vjust = 1.1, hjust = 0.5, angle = 45), show.legend = FALSE) +
     theme(axis.text.x=element_text(face="italic", size=10, angle=45, color="red", hjust=1), # x 标签倾斜
           axis.title.y = element_text(family='STKaiti'),
@@ -31,7 +32,7 @@ basicChart  <- function(data, name, color='pink', dateBreaks="1 day", yBreaks=10
     vv <- as.numeric(rate)
     yy <- round(as.numeric(lastest[,name]), 2)
     p <- p + 
-      annotate("text", x = as.Date(lastest[,"date"])-1, y = yy + ifelse(yy>max(v),-3*yBreaks, 3*yBreaks),
+      annotate("text", x = as.Date(lastest[,"date"])+2, y = avg, #  + ifelse(yy>max(v),-4*yBreaks, 6*yBreaks),
                label = paste0(name,":    \n",
                               "最新: ", yy, "\n",
                               "均值: ", v, "\n",
