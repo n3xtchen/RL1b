@@ -32,7 +32,7 @@ basicChart  <- function(data, name, color='pink', dateBreaks="1 day", yBreaks=10
     vv <- as.numeric(rate)
     yy <- round(as.numeric(lastest[,name]), 2)
     p <- p + 
-      annotate("text", x = as.Date(lastest[,"date"])+2, y = avg, #  + ifelse(yy>max(v),-4*yBreaks, 6*yBreaks),
+      annotate("text", x = as.Date(lastest[,"date"])+2, y = avg,
                label = paste0(name,":    \n",
                               "最新: ", yy, "\n",
                               "均值: ", v, "\n",
